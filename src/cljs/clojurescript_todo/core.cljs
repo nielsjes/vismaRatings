@@ -3,7 +3,8 @@
               [reagent.session :as session]
               [reitit.frontend :as reitit]
               [clerk.core :as clerk]
-              [accountant.core :as accountant]))
+              [accountant.core :as accountant]
+              ))
 
 ;; -------------------------
 ;; Routes
@@ -38,6 +39,7 @@
       [:li [:a {:href "/borken/link"} "Beregninger"]]]]))
 
 (defn search-estate-page []
+  (let [estate-number (atom {:value nil})]
   (fn []
   [:span.main
     [:div
@@ -50,6 +52,8 @@
             [:td "Ejendoms nr."]
             [:td [:input {
                           :id "estate-number" 
+                          :value (:value @estate-number)
+                          :on-change #(swap! estate-number assoc :value (-> % .-target .-value))
                           :type "text"}]]
           ]
           [:tr
@@ -63,13 +67,18 @@
                           :type "text"}]]
           ]
         ]
-
-
-
-        ]
+      ]
+        [:div
+          [:button {:on-click #(handle_search estate-number)} "Fremsøg"]]
     ]
-  ]))
+  ])))
   
+  (defn handle_search [estate-number-val]
+    (let [estate-number (:value @estate-number-val)]
+      (println estate-number)
+    )
+  )
+
 (defn items-page []
   (fn []
     [:span.main
