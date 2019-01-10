@@ -14,7 +14,8 @@
     ["/items"
      ["" :items]
      ["/:item-id" :item]]
-    ["/about" :about]]))
+    ["/about" :about]
+    ["/search-estate" :search-estate]]))
 
 (defn path-for [route & [params]]
   (if params
@@ -22,6 +23,8 @@
     (:path (reitit/match-by-name router route))))
 
 (path-for :about)
+(path-for :search-estate)
+
 ;; -------------------------
 ;; Page components
 
@@ -30,11 +33,43 @@
     [:span.main
      [:h1 "Ejendomme"]
      [:ul
+      [:li [:a {:href (path-for :search-estate)} "Fremsøg ejendom"]]
       [:li [:a {:href (path-for :items)} "Tilgængelige boliger"]]
       [:li [:a {:href "/borken/link"} "Beregninger"]]]]))
 
+(defn search-estate-page []
+  (fn []
+  [:span.main
+    [:div
+      [:h2 "Fremsøg ejendom"]
+      [:p "Udfyld ejendomsnr. eller adresse og fremsøg ejendom"]
+      [:div
+
+        [:table (:style "border: 0; width: 100%;")
+          [:tr
+            [:td "Ejendoms nr."]
+            [:td [:input {
+                          :id "estate-number" 
+                          :type "text"}]]
+          ]
+          [:tr
+            [:td "Adresse"]
+            [:td [:input {
+                          :id "estate-address" 
+                          :type "text"}]]
+            [:td "Post nr."]
+            [:td [:input {
+                          :id "estate-postal-number" 
+                          :type "text"}]]
+          ]
+        ]
 
 
+
+        ]
+    ]
+  ]))
+  
 (defn items-page []
   (fn []
     [:span.main
@@ -67,7 +102,9 @@
     :index #'home-page
     :about #'about-page
     :items #'items-page
-    :item #'item-page))
+    :item #'item-page
+    :search-estate #'search-estate-page
+    ))
 
 
 ;; -------------------------
