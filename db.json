@@ -1,3 +1,20 @@
 {
-  "addresses": [ "fakestreet", "otheraddress", "lameaddress", "lastaddress"  ]
+  "addresses": [ 
+    {
+     "id":"1",
+     "street": "fakestreet" 
+    },
+    {
+    "id":"2",
+    "street": "otheraddress"
+    },
+    {
+    "id":"3",
+    "street": "lameaddress"
+    },
+    {
+    "id":"4",
+    "street": "lastaddress"
+    }
+  ]
 }
