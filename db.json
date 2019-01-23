@@ -30,14 +30,6 @@
     },
     {
     "id":"8",
-    "street": "Daffodil Point"
-    },
-    {
-    "id":"9",
-    "street": "Tower Mount"
-    },
-    {
-    "id":"10",
     "street": "lastaddress"
     }
   ]
